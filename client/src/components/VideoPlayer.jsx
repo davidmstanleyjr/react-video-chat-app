@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Grid, Typography, Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -25,38 +25,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const VideoPlayer = () => {
+	const { name, callAccepted, myVideo, userVideo, callEnded, stream, call } =
+		useContext(SocketContext);
 	const classes = useStyles();
 
 	return (
 		<Grid container className={classes.gridContainer}>
-			<Paper classname={classes.paper}>
-				<Grid item xs={12} md={6}>
-					<Typography variant="h5" gutterBottom>
-						Name
-					</Typography>
-					<video
-						playsInLine
-						muted
-						ref={"myVideo"}
-						autoPlay
-						className={classes.video}
-					/>
-				</Grid>
-			</Paper>
+			{stream && (
+				<Paper classname={classes.paper}>
+					<Grid item xs={12} md={6}>
+						<Typography variant="h5" gutterBottom>
+							{name || "Name"}
+						</Typography>
+						<video
+							playsInLine
+							muted
+							ref={myVideo}
+							autoPlay
+							className={classes.video}
+						/>
+					</Grid>
+				</Paper>
+			)}
 
-			<Paper classname={classes.paper}>
-				<Grid item xs={12} md={6}>
-					<Typography variant="h5" gutterBottom>
-						Name
-					</Typography>
-					<video
-						playsInLine
-						ref={"userVideo"}
-						autoPlay
-						className={classes.video}
-					/>
-				</Grid>
-			</Paper>
+			{callAccepted && !callEnded && (
+				<Paper classname={classes.paper}>
+					<Grid item xs={12} md={6}>
+						<Typography variant="h5" gutterBottom>
+							{call.name || "Name"}
+						</Typography>
+						<video
+							playsInLine
+							ref={userVideo}
+							autoPlay
+							className={classes.video}
+						/>
+					</Grid>
+				</Paper>
+			)}
 		</Grid>
 	);
 };
