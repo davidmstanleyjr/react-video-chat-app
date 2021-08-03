@@ -3,8 +3,9 @@ import { Typography, AppBar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 import VideoPlayer from "./components/VideoPlayer";
+import Sidebar from "./components/Sidebar";
 import Notifications from "./components/Notifications";
-import Options from "./components/Options";
+import "./style.css";
 
 const useStyles = makeStyles((theme) => ({
 	appBar: {
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 const App = () => {
 	const classes = useStyles();
+
 	return (
 		<div className={classes.wrapper}>
 			<AppBar className={classes.appBar} position="static" color="inherit">
@@ -42,9 +44,9 @@ const App = () => {
 				</Typography>
 			</AppBar>
 			<VideoPlayer />
-			<Options>
+			<Sidebar>
 				<Notifications />
-			</Options>
+			</Sidebar>
 		</div>
 	);
 };

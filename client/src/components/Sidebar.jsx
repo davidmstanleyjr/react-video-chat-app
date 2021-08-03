@@ -7,11 +7,12 @@ import {
 	Container,
 	Paper,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Assignment, Phone, PhoneDisabled } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core/styles";
 
-import { SocketContext } from "../SocketContext";
+import { SocketContext } from "../Context";
+import "../style.css";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const Options = ({ children }) => {
+const Sidebar = ({ children }) => {
 	const { me, callAccepted, name, setName, callEnded, leaveCall, callUser } =
 		useContext(SocketContext);
 	const [idToCall, setIdToCall] = useState("");
@@ -78,10 +79,10 @@ const Options = ({ children }) => {
 						</Grid>
 						<Grid item xs={12} md={6} className={classes.padding}>
 							<Typography gutterBottom variant="h6">
-								Make A Call
+								Make a call
 							</Typography>
 							<TextField
-								label="ID to Call"
+								label="ID to call"
 								value={idToCall}
 								onChange={(e) => setIdToCall(e.target.value)}
 								fullWidth
@@ -98,15 +99,14 @@ const Options = ({ children }) => {
 									Hang Up
 								</Button>
 							) : (
-								<Button>
-									<Button
-										variant="contained"
-										color="primary"
-										startIcon={<Phone fontSize="large" />}
-										fullWidth
-										onClick={() => callUser(idToCall)}
-										className={classes.margin}
-									></Button>
+								<Button
+									variant="contained"
+									color="primary"
+									startIcon={<Phone fontSize="large" />}
+									fullWidth
+									onClick={() => callUser(idToCall)}
+									className={classes.margin}
+								>
 									Call
 								</Button>
 							)}
@@ -119,4 +119,4 @@ const Options = ({ children }) => {
 	);
 };
 
-export default Options;
+export default Sidebar;
