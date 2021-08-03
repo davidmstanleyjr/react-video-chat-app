@@ -32,7 +32,7 @@ const VideoPlayer = () => {
 	return (
 		<Grid container className={classes.gridContainer}>
 			{stream && (
-				<Paper classname={classes.paper}>
+				<Paper className={classes.paper}>
 					<Grid item xs={12} md={6}>
 						<Typography variant="h5" gutterBottom>
 							{name || "Name"}
